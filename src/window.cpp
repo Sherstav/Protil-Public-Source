@@ -598,24 +598,39 @@ void Window::Render()
 			ImGui::Text(("Holder: " + m_last_location.isp).c_str());
 
 			ImGui::Separator();
-			ImGui::Text("Atlas Join Link");
+			ImGui::Text("Atlas Join Links");
 
-			std::string tempstr = "atlas://" + m_last_sessionid;
+			ImGui::Text("(Join as Player)");
+			std::string tempstr = "atlas://j/" + m_last_sessionid;
 
-			char joinlink[44];
-
-			for (int i = 0; i < tempstr.length(); i++)
-			{
-				joinlink[i] = tempstr[i];
-
-			}
-
+			char joinlink[100];
 			ImGui::InputText("", joinlink, IM_ARRAYSIZE(joinlink), ImGuiInputTextFlags_ReadOnly);
 			//ImGui::Selectable(joinlink, false);
 			ImGui::SameLine();
-			if (ImGui::Button("Copy"))
+			if (ImGui::Button("Copy Player"))
 			{
 				ImGui::SetClipboardText(tempstr.c_str());
+			}
+
+			ImGui::Text("(Join as Spectator)");
+
+			std::string tempstr2 = "atlas://s/" + m_last_sessionid;
+
+			char joinlinkspectator[100];
+
+			for (int i = 0; i < tempstr2.length(); i++)
+			{
+				joinlinkspectator[i] = tempstr2[i];
+
+			}
+
+			ImGui::InputText("", joinlinkspectator, IM_ARRAYSIZE(joinlinkspectator), ImGuiInputTextFlags_ReadOnly);
+
+			ImGui::SameLine();
+
+			if (ImGui::Button("Copy Spectator"))
+			{
+				ImGui::SetClipboardText(tempstr2.c_str());
 			}
 
 			ImGui::End();
